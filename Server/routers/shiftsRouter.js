@@ -5,6 +5,7 @@ const router = express.Router();
 
 // Entry Point 'http://localhost:8000/shifts'
 
+/*Getting all the shifts */
 router.route('/').get(async (req, res) => {
     try {
         const shifts = await shiftBLL.getAllShifts();
@@ -13,6 +14,17 @@ router.route('/').get(async (req, res) => {
         res.status(500).json(error.name);
     }
 });
+
+/*Add a new Shift */
+router.route('/').post(async (req, res) => {
+    try {
+        const obj = req.body;
+        const result = await shiftBLL.addNewShift(obj);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json(error.name);
+    };
+})
 
 
 module.exports = router;
