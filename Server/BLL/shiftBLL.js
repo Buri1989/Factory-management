@@ -12,4 +12,11 @@ const addNewShift = async (obj) => {
     return 'Created!';
 };
 
-module.exports = { getAllShifts, addNewShift };
+/*Updating a shift */
+const updateShift = async (id, obj) => {
+    await Shift.findByIdAndUpdate(id, obj);
+    return 'Updated!';
+};
+
+
+module.exports = { getAllShifts, addNewShift, updateShift };

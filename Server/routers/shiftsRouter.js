@@ -26,5 +26,17 @@ router.route('/').post(async (req, res) => {
     };
 })
 
+/*Update a shift */
+router.route('/:id').put(async (req, res) => {
+    try {
+        const { id } = req.params;
+        const obj = req.body;
+        const result = await shiftBLL.updateShift(id, obj);
+        res.json(result);
+    } catch (error) {
+        res.status(500).json(error.name);
+    };
+});
+
 
 module.exports = router;
