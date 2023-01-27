@@ -34,7 +34,7 @@ router.route('/:id').put(async (req, res) => {
         const result = await shiftBLL.updateShift(id, obj);
         res.json(result);
     } catch (error) {
-        res.status(500).json(error.name);
+        res.status(500).json(error.message);
     };
 });
 
