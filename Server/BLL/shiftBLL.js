@@ -1,4 +1,4 @@
-const Shift = require('../models/shiftModel');
+const Shift = require('../models/Model')
 
 /*Get all the shifts */
 const getAllShifts = () => {
