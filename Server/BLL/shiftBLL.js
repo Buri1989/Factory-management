@@ -2,20 +2,32 @@ const Shift = require('../models/Model')
 
 /*Get all the shifts */
 const getAllShifts = () => {
-    return Shift.find({});
+    try {
+        return Shift.find({});
+    } catch (error) {
+        return error.name;
+    }
 };
 
 /*Add new shift */
 const addNewShift = async (obj) => {
-    const newShift = new Shift(obj)
-    await newShift.save();
-    return 'Created!';
+    try {
+        const newShift = new Shift(obj)
+        await newShift.save();
+        return 'Created!';
+    } catch (error) {
+        return error.name;
+    }
 };
 
 /*Updating a shift */
 const updateShift = async (id, obj) => {
-    await Shift.findByIdAndUpdate(id, obj);
-    return 'Updated!';
+    try {
+        await Shift.findByIdAndUpdate(id, obj);
+        return 'Updated!';
+    } catch (error) {
+        return error.name;
+    }
 };
 
 

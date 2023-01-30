@@ -45,10 +45,14 @@ const shiftSchema = new Schema(
 
 
 
-
+/*Creating a model */
 const User = mongoose.model('users', userSchema);
 const Department = mongoose.model('department', departmentSchema);
 const Employee = mongoose.model('employees', employeeSchema);
 const Shift = mongoose.model('shifts', shiftSchema);
 
-module.exports = { User, Department, Employee, Shift };
+/*exporting a model */
+module.exports = User;
+module.exports = Department;
+module.exports = Employee;
+module.exports = Shift;
