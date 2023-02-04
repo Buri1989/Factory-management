@@ -1,10 +1,10 @@
-const { Shift } = require('../models/Model')
+const shift = require('../models/Model')
 
 
 /*Get all the shifts */
 const getAllShifts = () => {
     try {
-        return Shift.find({});
+        return shift.find({});
     } catch (error) {
         return error.name;
     }
@@ -13,7 +13,7 @@ const getAllShifts = () => {
 /*Add new shift */
 const addNewShift = async (obj) => {
     try {
-        const newShift = new Shift(obj)
+        const newShift = new shift(obj)
         await newShift.save();
         return 'Created!';
     } catch (error) {
@@ -24,7 +24,7 @@ const addNewShift = async (obj) => {
 /*Updating a shift */
 const updateShift = async (id, obj) => {
     try {
-        await Shift.findByIdAndUpdate(id, obj);
+        await shift.findByIdAndUpdate(id, obj);
         return 'Updated!';
     } catch (error) {
         return error.name;

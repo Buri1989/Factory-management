@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose;
 
 /*User Schema */
-const userSchema = new Schema(
+const userSchema = new mongoose.Schema(
     {
         fullName: String,
         numOfActions: Number,
@@ -11,21 +11,21 @@ const userSchema = new Schema(
 );
 
 /*Department Schema */
-const departmentSchema = new Schema(
+const departmentSchema = new mongoose.Schema(
     {
         name: String,
-        manager: { type: Schema.Types.ObjectId, ref: 'Employee' },
+        manager: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
     },
     { versionKey: false }
 );
 
 /*Employee Schema */
-const employeeSchema = new Schema(
+const employeeSchema = new mongoose.Schema(
     {
         firstName: String,
         lastName: String,
         startWorkYear: Number,
-        departmentId: { type: Schema.Types.ObjectId, ref: 'Department' },
+        departmentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
         shifts: Array,
         previousShifts: Array
     },
@@ -33,7 +33,7 @@ const employeeSchema = new Schema(
 );
 
 /**Shift Schema */
-const shiftSchema = new Schema(
+const shiftSchema = new mongoose.Schema(
     {
         data: Date,
         startingHour: Number,

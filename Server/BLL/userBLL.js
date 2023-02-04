@@ -1,12 +1,8 @@
-const { User } = require('../models/Model')
+const user = require('../models/Model')
 
 
 const getAllUsers = () => {
-    try {
-        return User.find({});
-    } catch (error) {
-        return error.name;
-    };
-};
+    return user.find({});
+}
 
 module.exports = { getAllUsers };

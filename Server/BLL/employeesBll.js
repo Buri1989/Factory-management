@@ -1,54 +1,34 @@
-const { Employee } = require('../models/Model')
+const employee = require('../models/Model')
 const departmentsBLL = require('./departmentsBLL');
 
 
 /*Get - Get All - Read */
 const getAllEmployees = () => {
-    try {
-        return Employee.find({});
-    } catch (error) {
-        return error.name;
-    };
+    return employee.find({});
 };
 
 /*Get - Get by ID - Read */
 const getEmployeeById = (id) => {
-    try {
-        return Employee.findById({ _id: id })
-    } catch (error) {
-        return error.name;
-    };
+    return employee.findById({ _id: id })
 };
 
 /*Post - Create  */
 const addEmployee = async (obj) => {
-    try {
-        const employee = new Employee(obj);
-        await employee.save();
-        return 'Created!';
-    } catch (error) {
-        return error.name;
-    };
+    const employee = new employee(obj);
+    await employee.save();
+    return 'Created!';
 };
 
 /*PUT - Update */
 const updateEmployee = async (id, obj) => {
-    try {
-        await Employee.findByIdAndUpdate(id, obj);
-        return 'Updated!';
-    } catch (error) {
-        return error.name;
-    };
+    await employee.findByIdAndUpdate(id, obj);
+    return 'Updated!';
 };
 
 /*DELETE - Delete */
 const deleteEmployee = async (id) => {
-    try {
-        await Employee.findByIdAndDelete(id);
-        return 'Deleted!';
-    } catch (error) {
-        return error.name;
-    };
+    await employee.findByIdAndDelete(id);
+    return 'Deleted!';
 };
 
 
