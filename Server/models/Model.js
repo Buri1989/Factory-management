@@ -38,6 +38,7 @@ const shiftSchema = new Schema(
         data: Date,
         startingHour: Number,
         endingHour: Number,
+        shiftNumber: String,
     },
     { versionKey: false }
 );
