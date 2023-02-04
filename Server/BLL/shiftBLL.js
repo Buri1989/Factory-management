@@ -31,19 +31,5 @@ const updateShift = async (id, obj) => {
     }
 };
 
-/*Updating a shift */
-const addEmployeeToShift = async (obj) => {
 
-    const emp = await new Shift.findOne({ startingHour: 08 })
-        .populate('employees')
-        .exec((error, shift) => {
-            if (error) {
-                return error.name;
-            } else {
-                return 'Added'
-            }
-        })
-};
-
-
-module.exports = { getAllShifts, addNewShift, updateShift, addEmployeeToShift };
+module.exports = { getAllShifts, addNewShift, updateShift };
