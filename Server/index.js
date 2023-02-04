@@ -4,7 +4,7 @@ const connectDB = require('./configs/factoryDB')
 
 const shiftsRouter = require('./routers/shiftsRouter');
 const employeesRouter = require('./routers/employeesRouter');
-
+const departmentsRouter = require('./routers/departmentsRouter');
 
 const app = express();
 const port = 8000;
@@ -18,6 +18,7 @@ app.use(express.json());
 /*Routers */
 app.use('/shifts', shiftsRouter);
 app.use('/employees', employeesRouter);
+app.use('/departments', departmentsRouter);
 
 
 

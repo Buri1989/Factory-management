@@ -1,5 +1,5 @@
 const { Shift } = require('../models/Model')
-//const mongoose = require('mongoose')
+
 
 /*Get all the shifts */
 const getAllShifts = () => {
