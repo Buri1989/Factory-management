@@ -4,10 +4,8 @@ const { Schema } = mongoose;
 /*User Schema */
 const userSchema = new Schema(
     {
-
         fullName: String,
         numOfActions: Number,
-        password: String,
     },
     { versionKey: false }
 );
@@ -16,8 +14,7 @@ const userSchema = new Schema(
 const departmentSchema = new Schema(
     {
         name: String,
-        manager: String,
-
+        manager: { type: Schema.Types.ObjectId, ref: 'Employee' },
     },
     { versionKey: false }
 );
@@ -28,7 +25,9 @@ const employeeSchema = new Schema(
         firstName: String,
         lastName: String,
         startWorkYear: Number,
-        departmentId: String,
+        departmentId: { type: Schema.Types.ObjectId, ref: 'Department' },
+        shifts: Array,
+        previousShifts: Array
     },
     { versionKey: false }
 );
@@ -38,11 +37,10 @@ const shiftSchema = new Schema(
     {
         data: Date,
         startingHour: Number,
-        endingHour: Number
+        endingHour: Number,
     },
     { versionKey: false }
 );
-
 
 
 /*Creating a model */

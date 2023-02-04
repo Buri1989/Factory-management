@@ -3,7 +3,8 @@ const cors = require('cors')
 const connectDB = require('./configs/factoryDB')
 
 const shiftsRouter = require('./routers/shiftsRouter');
-//const usersRouter = require('./routers/usersRouter');
+const employeesRouter = require('./routers/employeesRouter');
+
 
 const app = express();
 const port = 8000;
@@ -16,7 +17,8 @@ app.use(express.json());
 
 /*Routers */
 app.use('/shifts', shiftsRouter);
-//app.use('/users', usersRouter);
+app.use('/employees', employeesRouter);
+
 
 
 app.listen(port, () => {

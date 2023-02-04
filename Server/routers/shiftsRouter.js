@@ -3,7 +3,7 @@ const shiftBLL = require('../BLL/shiftBLL')
 
 const router = express.Router();
 
-// Entry Point 'http://localhost:8000/shifts'
+/*Entry Point 'http://localhost:8000/shifts' */
 
 /*Getting all the shifts */
 router.route('/').get(async (req, res) => {
@@ -37,6 +37,7 @@ router.route('/:id').put(async (req, res) => {
         res.status(500).json(error.name);
     };
 });
+
 
 
 module.exports = router;

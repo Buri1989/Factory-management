@@ -1,4 +1,5 @@
-const Shift = require('../models/Model')
+const { Shift } = require('../models/Model')
+//const mongoose = require('mongoose')
 
 /*Get all the shifts */
 const getAllShifts = () => {
@@ -30,5 +31,19 @@ const updateShift = async (id, obj) => {
     }
 };
 
+/*Updating a shift */
+const addEmployeeToShift = async (obj) => {
 
-module.exports = { getAllShifts, addNewShift, updateShift };
+    const emp = await new Shift.findOne({ startingHour: 08 })
+        .populate('employees')
+        .exec((error, shift) => {
+            if (error) {
+                return error.name;
+            } else {
+                return 'Added'
+            }
+        })
+};
+
+
+module.exports = { getAllShifts, addNewShift, updateShift, addEmployeeToShift };
