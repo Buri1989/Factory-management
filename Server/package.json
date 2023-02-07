@@ -13,7 +13,9 @@
     "axios": "^1.2.5",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "express-jwt": "^8.4.1",
     "jsonfile": "^6.1.0",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.9.0"
   }
 }
