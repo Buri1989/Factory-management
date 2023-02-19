@@ -8,7 +8,6 @@ const getAllDepartments = () => {
     return Department.aggregate(pipeline);
 }
 
-
 const getDepartmentById = (id) => {
     return Department.findById({ _id: id });
 };
