@@ -1,36 +1,36 @@
-const department = require('../models/Model');
-const employeesBll = require('./employeesBll');
+const { Department } = require('../models/Model');
+const mongoose = require('mongoose');
 
 
-/*Get - Get All - Read */
 const getAllDepartments = () => {
-    return department.find({});
+    const pipeline = [{ $lookup: { from: "employees", localField: "manager", foreignField: "_id", as: "departmentManger" } },
+    { $lookup: { from: "employees", localField: "_id", foreignField: "departmentId", as: "departmentEmployee" } }];
+    return Department.aggregate(pipeline);
+}
+
+
+const getDepartmentById = (id) => {
+    return Department.findById({ _id: id });
 };
 
-/*Get - Get by ID - Read */
-const getDepartmentsById = (id) => {
-    return department.findById({ _id: id })
-};
-
-/*Post - Create  */
 const addDepartment = async (obj) => {
-    const depart = new department(obj);
-    await depart.save();
+    const Departments = new Department(obj);
+    await Departments.save();
     return 'Created!';
-
 };
 
-/*PUT - Update */
 const updateDepartment = async (id, obj) => {
-    await department.findByIdAndUpdate(id, obj);
+    await Department.findByIdAndUpdate(id, obj);
     return 'Updated!';
 };
 
-/*DELETE - Delete */
-const deleteDepartment = async (id) => {
 
-    await department.findByIdAndDelete(id);
-    return 'Deleted';
+const deleteDepartment = async (id) => {
+    await Department.findByIdAndDelete(id);
+    return 'Deleted!';
 };
 
-module.exports = { getAllDepartments, getDepartmentsById, addDepartment, updateDepartment, deleteDepartment };
+//Todo:add employee to department
+
+module.exports = { getAllDepartments, getDepartmentById, addDepartment, updateDepartment, deleteDepartment };
+

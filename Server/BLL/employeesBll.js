@@ -1,35 +1,42 @@
-const employee = require('../models/Model')
-const departmentsBLL = require('./departmentsBLL');
+const { Employee } = require('../models/Model')
+const mongoose = require('mongoose0');
 
 
-/*Get - Get All - Read */
 const getAllEmployees = () => {
-    return employee.find({});
-};
+    const pipeline = [{ $lookup: { from: "departments", localField: "departmentId", foreignField: "_id", as: "employeeDepartment" } },
+    { $lookup: { from: "shifts", localField: "shifts.shiftNumber", foreignField: "shiftNumber", as: "employeeShift" } }];
 
-/*Get - Get by ID - Read */
+    return Employee.aggregate(pipeline);
+}
+
 const getEmployeeById = (id) => {
-    return employee.findById({ _id: id })
-};
+    const idObject = mongoose.Types.ObjectId(id);
+    const pipeline = [{ $match: { _id: idObject } }, { $lookup: { from: "shifts", localField: "shifts.shiftNumber", foreignField: "shiftNumber", as: "employeeShift" } }];
 
-/*Post - Create  */
+    return Employee.aggregate(pipeline);
+}
+
 const addEmployee = async (obj) => {
-    const employee = new employee(obj);
+    const employee = new Employee(obj);
     await employee.save();
     return 'Created!';
-};
+}
 
-/*PUT - Update */
+const addEmployeeToShift = async (id, shiftNumber) => {
+    const idObject = mongoose.Types.ObjectId(shiftNumber);
+    await Employee.findByIdAndUpdate(id, { $addToSet: { shifts: { shiftNumber: idObject } } });
+    return 'Added New Employee To Shift';
+}
+
 const updateEmployee = async (id, obj) => {
-    await employee.findByIdAndUpdate(id, obj);
-    return 'Updated!';
-};
+    await Employee.findByIdAndUpdate(id, obj);
+    return 'Updated';
+}
 
-/*DELETE - Delete */
 const deleteEmployee = async (id) => {
-    await employee.findByIdAndDelete(id);
-    return 'Deleted!';
-};
+    await Employee.findByIdAndDelete(id)
+    return 'Deleted'
+}
 
 
-module.exports = { getAllEmployees, getEmployeeById, addEmployee, updateEmployee, deleteEmployee }
+module.exports = { getAllEmployees, getEmployeeById, addEmployee, addEmployeeToShift, updateEmployee, deleteEmployee }; v

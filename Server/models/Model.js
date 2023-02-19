@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-const { Schema } = mongoose;
 
 /*User Schema */
 const userSchema = new mongoose.Schema(
@@ -26,8 +25,8 @@ const employeeSchema = new mongoose.Schema(
         lastName: String,
         startWorkYear: Number,
         departmentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
-        shifts: Array,
-        previousShifts: Array
+        shifts: [String],
+
     },
     { versionKey: false }
 );
@@ -39,16 +38,17 @@ const shiftSchema = new mongoose.Schema(
         startingHour: Number,
         endingHour: Number,
         shiftNumber: String,
+
     },
     { versionKey: false }
 );
 
 
 /*Creating a model */
-const User = mongoose.model('users', userSchema);
+const User = mongoose.model('user', userSchema);
 const Department = mongoose.model('department', departmentSchema);
-const Employee = mongoose.model('employees', employeeSchema);
-const Shift = mongoose.model('shifts', shiftSchema);
+const Employee = mongoose.model('employee', employeeSchema);
+const Shift = mongoose.model('shift', shiftSchema);
 
 /*exporting a model */
 module.exports = User;
