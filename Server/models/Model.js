@@ -14,6 +14,7 @@ const departmentSchema = new mongoose.Schema(
     {
         name: String,
         manager: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
+
     },
     { versionKey: false }
 );

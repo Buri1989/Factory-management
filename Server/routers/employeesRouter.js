@@ -1,5 +1,5 @@
 const express = require('express')
-const employeeBLL = require('../BLL/employeesBll');
+const employeesBLL = require('../BLL/employeesBll');
 
 const router = express.Router();
 
@@ -8,11 +8,11 @@ const router = express.Router();
 /*Get all employees */
 router.route('/').get(async (req, res) => {
     try {
-        const employees = await employeeBLL.getAllEmployees();
+        const employees = await employeesBLL.getAllEmployees();
         res.json(employees);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
+        res.status(500).json(`The error is: ${error.errmsg}`);
     }
 });
 
@@ -20,11 +20,11 @@ router.route('/').get(async (req, res) => {
 router.route('/:id').get(async (req, res) => {
     try {
         const { id } = req.params;
-        const employee = await employeeBLL.getEmployeeById(id);
+        const employee = await employeesBLL.getEmployeeById(id);
         res.json(employee);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
+        res.status(500).json(`The error is: ${error.errmsg}`);
     }
 });
 
@@ -32,11 +32,11 @@ router.route('/:id').get(async (req, res) => {
 router.route('/').post(async (req, res) => {
     try {
         const obj = req.body;
-        const result = await employeeBLL.addEmployee(obj);
+        const result = await employeesBLL.addEmployee(obj);
         res.json(result);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
+        res.status(500).json(`The error is: ${error.errmsg}`);
     }
 });
 
@@ -45,11 +45,11 @@ router.route('/:id').post(async (req, res) => {
     try {
         const { id } = req.params;
         const shiftObj = req.body;
-        const result = await employeeBLL.addEmployeeToShift(id, shiftObj);
+        const result = await employeesBLL.addEmployeeToShift(id, shiftObj);
         res.json(result);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
+        res.status(500).json(`The error is: ${error.errmsg}`);
     }
 });
 
@@ -58,22 +58,23 @@ router.route('/:id').put(async (req, res) => {
     try {
         const { id } = req.params;
         const obj = req.body;
-        const result = await employeeBLL.updateEmployee(id, obj);
+        const result = await employeesBLL.updateEmployee(id, obj);
         res.json(result);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
+        res.status(500).json(`The error is: ${error.errmsg}`);
     }
 });
 
+/*delete employee */
 router.route('/:id').delete(async (req, res) => {
     try {
         const { id } = req.params;
-        const result = await employeeBLL.deleteEmployee(id);
+        const result = await employeesBLL.deleteEmployee(id);
         res.json(result);
     }
     catch (error) {
-        res.json(500).json(`The error is: ${error.name}`);
+        res.json(500).json(`The error is: ${error.errmsg}`);
     }
 })
 

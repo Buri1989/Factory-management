@@ -6,6 +6,7 @@ const connectDB = require('./configs/factoryDB')
 const authRouter = require('./routers/authRouter');
 const welcomeRouter = require('./routers/welcomeRouter');
 const employeesRouter = require('./routers/employeesRouter');
+const departmentsRouter = require('./routers/departmentsRouter');
 
 const app = express();
 const port = 8000;
@@ -20,6 +21,7 @@ app.use(express.json());
 app.use('/auth', authRouter);
 app.use('/welcome', welcomeRouter);
 app.use('/employees', employeesRouter);
+app.use('/departments', departmentsRouter);
 
 
 

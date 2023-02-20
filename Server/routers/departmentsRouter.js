@@ -5,27 +5,27 @@ const router = express.Router();
 
 /*Entry Point 'http://localhost:8000/departments'*/
 
-/*Get all departments */
+/*Get All */
 router.route('/').get(async (req, res) => {
     try {
         const departments = await departmentsBLL.getAllDepartments();
         res.json(departments);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`)
-    };
+        res.status(500).json(`The error is: ${error.errmsg}`);
+    }
 });
 
-/*Get departments by id */
+/*Get department by id */
 router.route('/:id').get(async (req, res) => {
     try {
         const { id } = req.params;
-        const depart = await departmentsBLL.getDepartmentsById(id);
-        res.json(depart);
+        const department = await departmentsBLL.getDepartmentById(id);
+        res.json(department);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
-    };
+        res.status(500).json(`The error is: ${error.errmsg}`);
+    }
 });
 
 /*Add new department */
@@ -36,8 +36,21 @@ router.route('/').post(async (req, res) => {
         res.json(result);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
-    };
+        res.status(500).json(`The error is: ${error.errmsg}`);
+    }
+});
+
+/*Add new employee to a department */
+router.route('/:id').post(async (req, res) => {
+    try {
+        const { id } = req.params;
+        const employeeObj = req.body;
+        const result = await departmentsBLL.addEmployeeToDepartment(id, employeeObj);
+        res.json(result);
+    }
+    catch (error) {
+        res.status(500).json(`The error is: ${error.errmsg}`);
+    }
 });
 
 /*Update department */
@@ -49,21 +62,21 @@ router.route('/:id').put(async (req, res) => {
         res.json(result);
     }
     catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
-    };
+        res.status(500).json(`The error is: ${error.errmsg}`);
+    }
 });
 
-/*Delete department */
+/*delete department*/
 router.route('/:id').delete(async (req, res) => {
     try {
         const { id } = req.params;
         const result = await departmentsBLL.deleteDepartment(id);
         res.json(result);
-    } catch (error) {
-        res.status(500).json(`The error is: ${error.name}`);
-    };
+    }
+    catch (error) {
+        res.status(500).json(`The error is: ${error.errmsg}`);
+    }
 });
 
-//Todo:Router for adding employee to department
 
 module.exports = router;
