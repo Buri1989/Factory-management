@@ -39,7 +39,6 @@ const shiftSchema = new mongoose.Schema(
         startingHour: Number,
         endingHour: Number,
         shiftNumber: String,
-
     },
     { versionKey: false }
 );
