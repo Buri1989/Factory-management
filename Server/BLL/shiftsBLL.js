@@ -1,13 +1,13 @@
 const { Shift } = require('../models/Model');
 
 /*Get Shifts */
-const getShifts = () => {
-    return Shift.find({});
+const getShifts = async () => {
+    return await Shift.find({});
 };
 
 /*Get Shift by id */
-const getShiftById = (id) => {
-    return Shift.findById({ _id: id });
+const getShiftById = async (id) => {
+    return await Shift.findById({ _id: id });
 };
 
 

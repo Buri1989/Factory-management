@@ -1,8 +1,8 @@
 const { User } = require('../models/Model');
 
 /*Get all users */
-const getAllUsers = () => {
-    return User.find({});
+const getAllUsers = async () => {
+    return await User.find({});
 };
 
 /*Get user by id */

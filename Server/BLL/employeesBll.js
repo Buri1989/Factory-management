@@ -1,39 +1,44 @@
 const { Employee } = require('../models/Model')
-const mongoose = require('mongoose0');
+
 
 /*Get all employees */
-const getAllEmployees = () => {
-    const pipeline = [{ $lookup: { from: "departments", localField: "departmentId", foreignField: "_id", as: "employeeDepartment" } },
-    { $lookup: { from: "shifts", localField: "shifts.shiftNumber", foreignField: "shiftNumber", as: "employeeShift" } }];
-
-    return Employee.aggregate(pipeline);
-}
+const getAllEmployees = async () => {
+    return await Employee.find({});
+};
 
 /*Get employee by id */
-const getEmployeeById = (id) => {
-    const idObject = mongoose.Types.ObjectId(id);
-    const pipeline = [{ $match: { _id: idObject } }, { $lookup: { from: "shifts", localField: "shifts.shiftNumber", foreignField: "shiftNumber", as: "employeeShift" } }];
-
-    return Employee.aggregate(pipeline);
-}
+const getEmployeeById = async (id) => {
+    return await Employee.findById({ _id: id });
+};
 
 /*Add new employee */
 const addEmployee = async (obj) => {
-    const employee = new Employee(obj);
+    let employee = Employee(
+        {
+            firstName: obj.firstName,
+            lastName: obj.lastName,
+            startWorkYear: obj.startWorkYear,
+            departmentId: obj.departmentId,
+        });
     await employee.save();
     return 'Created!';
 }
 
 /*Add new employee to a new shift */
-const addEmployeeToShift = async (id, shiftNumber) => {
-    const idObject = mongoose.Types.ObjectId(shiftNumber);
-    await Employee.findByIdAndUpdate(id, { $addToSet: { shifts: { shiftNumber: idObject } } });
+const updateSingleEmployee = async (id, field, value) => {
+    await Employee.findByIdAndUpdate(id, { [field]: value });
     return 'Added New Employee To Shift';
 }
 
 /*Update an employee */
 const updateEmployee = async (id, obj) => {
-    await Employee.findByIdAndUpdate(id, obj);
+    await Employee.findByIdAndUpdate(id,
+        {
+            firstName: obj.firstName,
+            lastName: obj.lastName,
+            startWorkYear: obj.startWorkYear,
+            departmentId: obj.departmentId,
+        });
     return 'Updated';
 }
 
@@ -44,4 +49,4 @@ const deleteEmployee = async (id) => {
 }
 
 
-module.exports = { getAllEmployees, getEmployeeById, addEmployee, addEmployeeToShift, updateEmployee, deleteEmployee }; v
+module.exports = { getAllEmployees, getEmployeeById, addEmployee, updateSingleEmployee, updateEmployee, deleteEmployee }; 
