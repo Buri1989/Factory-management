@@ -1,7 +1,5 @@
 const axios = require('axios')
 
-
-
 const getLoginData = () => {
     return axios.get('https://jsonplaceholder.typicode.com/users');
 };
