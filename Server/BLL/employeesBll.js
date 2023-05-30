@@ -25,9 +25,9 @@ const addEmployee = async (obj) => {
 }
 
 /*Add new employee to a new shift */
-const updateSingleEmployee = async (id, field, value) => {
+const updateSingleField = async (id, field, value) => {
     await Employee.findByIdAndUpdate(id, { [field]: value });
-    return 'Added New Employee To Shift';
+    return 'Updated';
 }
 
 /*Update an employee */
@@ -49,4 +49,4 @@ const deleteEmployee = async (id) => {
 }
 
 
-module.exports = { getAllEmployees, getEmployeeById, addEmployee, updateSingleEmployee, updateEmployee, deleteEmployee }; 
+module.exports = { getAllEmployees, getEmployeeById, addEmployee, updateSingleField, updateEmployee, deleteEmployee }; 

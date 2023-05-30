@@ -37,7 +37,7 @@ const updateShift = async (id, obj) => {
 };
 
 /*Update single shift */
-const updateSingleShift = async (id, field, value) => {
+const updateSingleField = async (id, field, value) => {
     await Shift.findByIdAndUpdate(id, { [field]: value })
     return 'Updated';
 };
@@ -49,4 +49,4 @@ const deleteShift = async (id) => {
 }
 
 
-module.exports = { getShifts, getShiftById, addNewShift, updateShift, updateSingleShift, deleteShift };
+module.exports = { getShifts, getShiftById, addNewShift, updateShift, updateSingleField, deleteShift };
