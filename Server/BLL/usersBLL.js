@@ -12,20 +12,22 @@ const getUserById = async (id) => {
 
 /*Create a new user  */
 const createNewUser = async (obj) => {
-    const user = User({
-        fullName: obj.fullName,
-        numOfActions: obj.createNewUser,
-    });
+    let user = User(
+        {
+            fullName: obj.fullName,
+            numOfActions: obj.createNewUser,
+        });
     await user.save();
     return 'Created!'
 };
 
 /*Update user */
 const updateUser = async (id, obj) => {
-    await User.findByIdAndUpdate(id, {
-        fullName: obj.fullName,
-        numOfActions: obj.createNewUser,
-    });
+    await User.findByIdAndUpdate(id,
+        {
+            fullName: obj.fullName,
+            numOfActions: obj.createNewUser,
+        });
     return 'Updated!'
 };
 

@@ -1,18 +1,52 @@
 const { Shift } = require('../models/Model');
 
+/*Get Shifts */
+const getShifts = () => {
+    return Shift.find({});
+};
 
-/*Add new shift + adding a shift number */
+/*Get Shift by id */
+const getShiftById = (id) => {
+    return Shift.findById({ _id: id });
+};
+
+
+/*Add new shift  */
 const addNewShift = async (obj) => {
-    const shift = new Shift(obj);
+    let shift = Shift(
+        {
+            data: obj.data,
+            startingHour: obj.startingHour,
+            endingHour: obj.endingHour,
+            employees: obj.employees,
+        });
     await shift.save();
     return 'Created!';
 };
 
 /*Update shift */
 const updateShift = async (id, obj) => {
-    await Shift.findByIdAndUpdate(id, obj);
+    await Shift.findByIdAndUpdate(id,
+        {
+            data: obj.data,
+            startingHour: obj.startingHour,
+            endingHour: obj.endingHour,
+            employees: obj.employees,
+        });
     return 'Updated';
+};
+
+/*Update single shift */
+const updateSingleShift = async (id, field, value) => {
+    await Shift.findByIdAndUpdate(id, { [field]: value })
+    return 'Updated';
+};
+
+/*Delete Shift */
+const deleteShift = async (id) => {
+    await Shift.findByIdAndDelete(id);
+    return 'Deleted!';
 }
 
 
-module.exports = { addNewShift, updateShift };
+module.exports = { getShifts, getShiftById, addNewShift, updateShift, updateSingleShift, deleteShift };
