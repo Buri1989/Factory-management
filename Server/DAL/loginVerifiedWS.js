@@ -1,9 +1,13 @@
 const axios = require('axios')
 
-const url = 'https://jsonplaceholder.typicode.com/users';
+
 
 const getLoginData = () => {
-    return axios.get(url);
+    return axios.get('https://jsonplaceholder.typicode.com/users');
 };
 
-module.exports = { getLoginData };
+const getLoginDataById = (id) => {
+    return axios.get('https://jsonplaceholder.typicode.com/users/' + id)
+}
+
+module.exports = { getLoginData, getLoginDataById };

@@ -1,16 +1,27 @@
 const jsonfile = require(jsonfile);
+const path = require('path')
+const actionFile = path.join(__dirname, '..', '/Factory-management/Factory-management/Server/data/actions.json')
 
-const actionsFile = '../data/actions.json'
 
 /*Read from file */
-const readFromFile = () => {
-    return jsonfile.readToFile(actionsFile);
+const readFromFile = async () => {
+    return await jsonfile.readToFile(actionFile)
+
 };
 
 /*Write to file */
-const writeToFile = async (obj) => {
-    await jsonfile.actionsFile(actionsFile, obj);
-    return 'Done';
-};
+const writeToFile = (obj) => {
+    readFromFile().then((data) => {
+        data.actions.push(data);
+        jsonfile.writeToFile(actionFile, data, (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }).catch((err) => {
+        console.log(err.message)
+    })
+}
+
 
 module.exports = { readFromFile, writeToFile };

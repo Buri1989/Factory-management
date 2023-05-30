@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema(
 const departmentSchema = new mongoose.Schema(
     {
         name: String,
-        manager: { type: mongoose.Schema.Types.ObjectId, ref: 'Employee' },
+        manager: String,
 
     },
     { versionKey: false }
@@ -25,9 +25,7 @@ const employeeSchema = new mongoose.Schema(
         firstName: String,
         lastName: String,
         startWorkYear: Number,
-        departmentId: { type: mongoose.Schema.Types.ObjectId, ref: 'Department' },
-        shifts: [String],
-
+        departmentId: String,
     },
     { versionKey: false }
 );
@@ -38,7 +36,7 @@ const shiftSchema = new mongoose.Schema(
         data: Date,
         startingHour: Number,
         endingHour: Number,
-        shiftNumber: String,
+        employees: Array,
     },
     { versionKey: false }
 );
@@ -51,7 +49,5 @@ const Employee = mongoose.model('employee', employeeSchema);
 const Shift = mongoose.model('shift', shiftSchema);
 
 /*exporting a model */
-module.exports = User;
-module.exports = Department;
-module.exports = Employee;
-module.exports = Shift;
+module.exports = { User, Department, Employee, Shift };
+
