@@ -1,5 +1,5 @@
 const express = require('express');
-const jwt = require('jwt');
+const jwt = require('jsonwebtoken');
 const usersBLL = require('../BLL/usersBLL');
 const userLoginWS = require('../BLL/usersLoginWS');
 const actionFileBLL = require('../BLL/actionsFileBLL');
