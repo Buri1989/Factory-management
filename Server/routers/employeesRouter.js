@@ -37,6 +37,7 @@ router.route('/').get(async (req, res) => {
 /* Entry Point: 'http://localhost:8888/employees/shiftsanddepartments'*/
 router.route('/shiftsanddepartments').get(async (req, res) => {
     const token = req.headers["x-access-token"];
+    const employeeId = req.headers["employee-id"];
     if (!token) {
         res.status(401).json("No Token Provided");
     }
@@ -48,11 +49,11 @@ router.route('/shiftsanddepartments').get(async (req, res) => {
         }
         try {
             const userValidation = await authBLL.isUserHasCredit(data.userId);
-            const employees = await employeesBLL.getEmployeeById();
+            const employeeData = await employeesBLL.getEmployeeById(employeeId);
             const shifts = await shiftBLL.getShifts();
             const departments = await departmentsBLL.getAllDepartments();
             res.json({
-                employees,
+                employeeData,
                 shifts,
                 departments,
                 currentUserFullName: data.name,
