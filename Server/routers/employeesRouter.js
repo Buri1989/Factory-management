@@ -109,7 +109,7 @@ router.route('/:id').get(async (req, res) => {
         }
         try {
             const userValidation = await authBLL.isUserHasCredit(data.userId)
-            const employees = await employeesBLL.getAllEmployees(employeeId);
+            const employees = await employeesBLL.getEmployeeById(employeeId);
             res.json({
                 employees,
                 currentUserFullName: data.name,
@@ -175,7 +175,7 @@ router.route('/:id').put(async (req, res) => {
         }
         try {
             const userValidation = await authBLL.isUserHasCredit(data.userId)
-            const result = await employeesBLL.getAllEmployees(employeeId, obj);
+            const result = await employeesBLL.updateEmployee(employeeId, obj);
             /* Needs to Update the field Manager in the chosen department With employeeId */
             const status = await departmentsBLL.updateSingleField(chosenDepartmentId, "Manager", employeeId)
             res.json({

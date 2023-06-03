@@ -61,8 +61,10 @@ router.route('/employees').get(async (req, res) => {
 });
 
 /*Entry Point 'http://localhost:8000/shifts/id'*/
-router.route('/').get(async (req, res) => {
+router.route('/:id').get(async (req, res) => {
     const token = req.headers['x-access-token']
+    const shiftId = req.params.id;
+
     if (!token) {
         res.status(401).json("No Token Provided");
     }
@@ -85,8 +87,9 @@ router.route('/').get(async (req, res) => {
 });
 
 /*Entry Point 'http://localhost:8000/shifts/id'*/
-router.route('/').post(async (req, res) => {
+router.route('/:id').post(async (req, res) => {
     const token = req.headers['x-access-token']
+    const obj = req.body;
     if (!token) {
         res.status(401).json("No Token Provided");
     }
@@ -121,8 +124,9 @@ router.route('/').post(async (req, res) => {
 });
 
 /*Entry Point 'http://localhost:8000/shifts/update/id'*/
-router.route('/').post(async (req, res) => {
+router.route('/update/:id').post(async (req, res) => {
     const token = req.headers['x-access-token']
+    const objData = req.body;
     if (!token) {
         res.status(401).json("No Token Provided");
     }
