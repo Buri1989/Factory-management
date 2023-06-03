@@ -60,7 +60,7 @@ router.route('/shiftsanddepartments').get(async (req, res) => {
                 creditNum: userValidation.creditNum,
             });
         }
-        catch (err {
+        catch (err) {
             res.status(500).json(`The error is: ${err.errmsg}`);
         }
     })
