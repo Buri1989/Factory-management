@@ -36,13 +36,13 @@ label {
   margin-bottom: 10px;
 }
 
-input[type="fName"],
-input[type="lName"],
-input[type="lDepartment"]
-  input[type="lStartWorkYear"]
-  input[type="startDate"]
-  input[type="startingHour"]
-  input[type="endingHour"] {
+input[type="fname"],
+input[type="lname"],
+input[type="ldepartment"]
+  input[type="lstartworkyear"]
+  input[type="startdate"]
+  input[type="startinghour"]
+  input[type="endinghour"] {
   width: 100%;
   padding: 10px;
   font-size: 16px;
